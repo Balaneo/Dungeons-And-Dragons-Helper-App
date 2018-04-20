@@ -604,7 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonIndex: 0
   diceObjectData: {fileID: 0}
-  numberOfDice: 1
+  numberOfDice: 0
   diceTypeText: {fileID: 114513305526954890}
   numberOfDiceField: {fileID: 114355386559950292}
 --- !u!114 &114725593791360986

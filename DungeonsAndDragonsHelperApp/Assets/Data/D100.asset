@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222a559f0eb40a04ca77ad10eaac6e7b, type: 3}
   m_Name: D100
   m_EditorClassIdentifier: 
+  label: D100
   sides: 0a000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
   mesh: {fileID: 0}
   meshCollider: {fileID: 0}

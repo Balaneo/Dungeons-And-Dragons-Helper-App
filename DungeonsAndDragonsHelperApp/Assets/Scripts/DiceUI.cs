@@ -19,16 +19,26 @@ public class DiceUI : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        if(buttonContainer != null)
+        GameObject manager = GameObject.FindGameObjectWithTag("GameController");
+
+        if (manager != null)
+        {
+            //manager.GetComponent<Manager>().cameraTarget = newDice;
+        }
+
+        if (buttonContainer != null)
         {
             for(int i = 0; i < diceObjectDatas.Length; i++)
             {
                 if(diceButtonPrefab != null)
                 {
                     buttons.Add(Instantiate(diceButtonPrefab, buttonContainer.transform, false));
-                    buttons[i].GetComponent<DiceButton>().buttonIndex = i;
-                    buttons[i].GetComponent<DiceButton>().diceObjectData = diceObjectDatas[i];
-                    buttons[i].GetComponent<DiceButton>().diceTypeText.text = diceObjectDatas[i].label;
+
+                    DiceButton localDiceButton = buttons[i].GetComponent<DiceButton>();
+
+                    localDiceButton.buttonIndex = i;
+                    localDiceButton.diceObjectData = diceObjectDatas[i];
+                    localDiceButton.diceTypeText.text = diceObjectDatas[i].label;
                 }
             }
         }		
@@ -38,5 +48,28 @@ public class DiceUI : MonoBehaviour {
     void Update()
     {
 
+    }
+
+    public void RollDice()
+    {
+        foreach(GameObject g in buttons)
+        {
+            g.GetComponent<DiceButton>().SpawnDice();
+        }
+    }
+
+    public void ClearDice()
+    {
+        foreach(GameObject g in buttons)
+        {
+            DiceButton cachedDiceButton = g.GetComponent<DiceButton>();
+
+            foreach(GameObject d in cachedDiceButton.diceObjects)
+            {
+                Destroy(d);
+            }
+
+            cachedDiceButton.diceObjects.Clear();            
+        }
     }
 }
