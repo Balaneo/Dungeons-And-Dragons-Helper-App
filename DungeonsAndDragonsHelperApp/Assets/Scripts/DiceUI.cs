@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DiceUI : MonoBehaviour {
 
     public GameObject buttonContainer;
-
+    public GameObject diceSpawner;
     public GameDiceObject[] diceObjectDatas;
     public GameObject diceButtonPrefab;
     public List<GameObject> buttons;
@@ -18,13 +18,6 @@ public class DiceUI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
-        GameObject manager = GameObject.FindGameObjectWithTag("GameController");
-
-        if (manager != null)
-        {
-            //manager.GetComponent<Manager>().cameraTarget = newDice;
-        }
 
         if (buttonContainer != null)
         {
@@ -52,24 +45,25 @@ public class DiceUI : MonoBehaviour {
 
     public void RollDice()
     {
+        List<GameDiceObject> diceTypes = new List<GameDiceObject>();
+        List<int> diceAmounts = new List<int>();
+
         foreach(GameObject g in buttons)
         {
-            g.GetComponent<DiceButton>().SpawnDice();
+            diceTypes.Add(g.GetComponent<DiceButton>().diceObjectData);
+            diceAmounts.Add(g.GetComponent<DiceButton>().numberOfDice);
+            g.SetActive(false);
         }
+
+        diceSpawner.GetComponent<DiceSpawner>().SpawnDice(diceTypes, diceAmounts);
     }
 
     public void ClearDice()
     {
-        foreach(GameObject g in buttons)
+        diceSpawner.GetComponent<DiceSpawner>().DestroyAllDice();
+        foreach (GameObject g in buttons)
         {
-            DiceButton cachedDiceButton = g.GetComponent<DiceButton>();
-
-            foreach(GameObject d in cachedDiceButton.diceObjects)
-            {
-                Destroy(d);
-            }
-
-            cachedDiceButton.diceObjects.Clear();            
+            g.SetActive(true);
         }
     }
 }
