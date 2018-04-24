@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: D100
   sides: 0a000000140000001e00000028000000320000003c00000046000000500000005a00000064000000
-  mesh: {fileID: 0}
-  meshCollider: {fileID: 0}
+  mesh: {fileID: 4300000, guid: ed71573448eff9340a5c081106d91202, type: 3}
+  meshCollider: {fileID: 4300002, guid: ed71573448eff9340a5c081106d91202, type: 3}
